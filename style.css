@@ -279,7 +279,7 @@ body {
     animation: satellitesSpinLeft 140s linear infinite;
 }
 .bottom-satellites {
-    top: 130px; /* Ring Y = 180 + 130 = 310px = center of the lotus flower */
+    top: 90px; /* Ring Y = 180 + 90 = 270px = around the lifted lotus flower */
     animation: satellitesSpinRight 140s linear infinite;
 }
 .satellite {
@@ -844,7 +844,7 @@ body.small-off .tassel::before {
 /* 3D Lotus Base */
 .lotus-base {
     position: absolute;
-    top: 250px; /* Positioned exactly beneath the main lantern */
+    top: 210px; /* Lifted so petals engulf the bottom 1/4 (30px) of the bottom lantern body */
     left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
