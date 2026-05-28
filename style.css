@@ -208,7 +208,7 @@ main {
     box-sizing: border-box;
     backface-visibility: hidden;
     overflow: hidden;
-    transition: background-color 1s ease;
+    transition: background-color 1.5s ease, box-shadow 1.5s ease, border-color 1.5s ease;
     /* Inner shadow for depth */
     box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 0 15px var(--glow-color);
 }

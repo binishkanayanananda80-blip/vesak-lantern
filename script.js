@@ -68,5 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
             bg.appendChild(star);
         }
     }
+    /* ── Auto Theme Cycler ──────────────────── */
+    const themes = ['theme-golden', 'theme-blue', 'theme-purple', 'theme-red', 'theme-rainbow'];
+    let currentThemeIdx = 0;
+    
+    // Set initial theme to make sure body has one
+    document.body.className = themes[0];
+    
+    setInterval(() => {
+        // Remove current theme
+        document.body.classList.remove(themes[currentThemeIdx]);
+        // Move to next theme
+        currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+        // Add new theme
+        document.body.classList.add(themes[currentThemeIdx]);
+    }, 3000);
 
 });
