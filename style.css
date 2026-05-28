@@ -270,15 +270,17 @@ body {
 /* Satellites */
 .satellites-container {
     position: absolute;
-    top: 50%; left: 50%;
+    left: 0;
     width: 0; height: 0;
     transform-style: preserve-3d;
 }
-.lantern-top .satellites-container {
-    top: 10%; /* Move up away from middle body */
+.top-satellites {
+    top: -215px; /* Positions horizontal arm exactly at Y=-240px (top border) */
+    animation: satellitesSpinLeft 140s linear infinite;
 }
-.lantern-bottom .satellites-container {
-    top: 90%; /* Move down away from middle body */
+.bottom-satellites {
+    top: 265px; /* Positions horizontal arm exactly at Y=240px (bottom border) */
+    animation: satellitesSpinRight 140s linear infinite;
 }
 .satellite {
     position: absolute;
@@ -503,23 +505,15 @@ body {
     opacity: 0.5;
 }
 /* Position satellites around */
-.lantern-top .sat-1 { transform: rotateY(0deg) translateZ(280px); }
-.lantern-top .sat-2 { transform: rotateY(45deg) translateZ(280px); }
-.lantern-top .sat-3 { transform: rotateY(90deg) translateZ(280px); }
-.lantern-top .sat-4 { transform: rotateY(135deg) translateZ(280px); }
-.lantern-top .sat-5 { transform: rotateY(180deg) translateZ(280px); }
-.lantern-top .sat-6 { transform: rotateY(225deg) translateZ(280px); }
-.lantern-top .sat-7 { transform: rotateY(270deg) translateZ(280px); }
-.lantern-top .sat-8 { transform: rotateY(315deg) translateZ(280px); }
-
-.lantern-bottom .sat-1 { transform: rotateY(0deg) translateZ(280px); }
-.lantern-bottom .sat-2 { transform: rotateY(45deg) translateZ(280px); }
-.lantern-bottom .sat-3 { transform: rotateY(90deg) translateZ(280px); }
-.lantern-bottom .sat-4 { transform: rotateY(135deg) translateZ(280px); }
-.lantern-bottom .sat-5 { transform: rotateY(180deg) translateZ(280px); }
-.lantern-bottom .sat-6 { transform: rotateY(225deg) translateZ(280px); }
-.lantern-bottom .sat-7 { transform: rotateY(270deg) translateZ(280px); }
-.lantern-bottom .sat-8 { transform: rotateY(315deg) translateZ(280px); }
+/* Position satellites around */
+.sat-1 { transform: rotateY(0deg) translateZ(280px); }
+.sat-2 { transform: rotateY(45deg) translateZ(280px); }
+.sat-3 { transform: rotateY(90deg) translateZ(280px); }
+.sat-4 { transform: rotateY(135deg) translateZ(280px); }
+.sat-5 { transform: rotateY(180deg) translateZ(280px); }
+.sat-6 { transform: rotateY(225deg) translateZ(280px); }
+.sat-7 { transform: rotateY(270deg) translateZ(280px); }
+.sat-8 { transform: rotateY(315deg) translateZ(280px); }
 
 /* Satellite Individual Colors - Buddhist Flag */
 .satellite.sat-1 { --panel-bg: rgba(0, 85, 164, 0.85); --glow-color: #0055A4; } /* Blue */
@@ -581,12 +575,7 @@ body {
     100% { transform: translate(-50%, -50%) rotateY(0deg); }
 }
 /* For satellites container */
-.lantern-top .satellites-container {
-    animation: satellitesSpinLeft 140s linear infinite;
-}
-.lantern-bottom .satellites-container {
-    animation: satellitesSpinRight 140s linear infinite;
-}
+/* We moved them out, so we don't need the nested selectors anymore. They have animations directly in the class block above. */
 @keyframes satellitesSpinLeft {
     0% { transform: rotateY(0deg); }
     100% { transform: rotateY(-360deg); }
