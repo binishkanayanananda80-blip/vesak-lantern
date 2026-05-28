@@ -159,7 +159,7 @@ main {
 .lantern-assembly {
     position: relative;
     transform-style: preserve-3d;
-    transform: translateY(-150px) scale(0.9) rotateX(-5deg); /* Move up and scale down slightly to prevent bottom cutoff, and Slight tilt for depth */
+    transform: scale(0.6) translateY(-40px) rotateX(-5deg); /* Scale down enough so both top and bottom fit entirely on screen */
 }
 .lantern-top, .lantern-middle, .lantern-bottom {
     position: absolute;
