@@ -135,10 +135,19 @@ main {
 .main-title {
     font-family: var(--font-heading);
     font-size: 1.8rem;
-    color: #fff;
+    color: var(--glow-color);
     text-shadow: 0 0 16px var(--glow-color);
     letter-spacing: 2px;
     margin: 0;
+    transition: color 1.5s ease, text-shadow 1.5s ease;
+}
+.team-name {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-left: 10px;
+    letter-spacing: 1px;
 }
 .top-controls {
     display: flex;
