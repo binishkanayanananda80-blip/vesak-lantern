@@ -878,42 +878,53 @@ body.small-off .tassel::before {
     position: absolute;
     border-radius: 50% / 100% 100% 0 0; /* Petal pointing up */
     transform-origin: bottom center;
-    opacity: 0.95;
-    box-shadow: 0 0 20px rgba(255, 0, 85, 0.6), inset 0 0 30px rgba(150, 0, 40, 0.8);
-    border: 2px solid #ff4d94;
-    filter: drop-shadow(0 0 10px #ff0055);
+    opacity: 1;
+    backface-visibility: visible;
+    box-shadow: 0 0 25px rgba(255, 0, 85, 0.9), inset 0 0 40px rgba(80, 0, 20, 0.6);
+    border: 3px solid #ff1a6e;
+    filter: drop-shadow(0 0 14px #cc0033) drop-shadow(0 -4px 8px rgba(255,100,150,0.6));
 }
 
-/* Inner Ring */
+/* Inner Ring — tall upright petals that cup the base */
 .inner .petal {
-    width: 100px;
-    height: 150px;
-    left: -50px;
-    top: -150px; /* Bottom is at Y=0 */
-    background: linear-gradient(to top, #ff0055, #ff99bb);
+    width: 110px;
+    height: 160px;
+    left: -55px;
+    top: -160px;
+    background: linear-gradient(160deg,
+        #ff99cc 0%,
+        #ff4488 20%,
+        #cc0044 55%,
+        #880022 100%);
 }
-.inner .p1 { transform: rotateY(0deg) translateZ(80px) rotateX(-30deg); }
-.inner .p2 { transform: rotateY(45deg) translateZ(80px) rotateX(-30deg); }
-.inner .p3 { transform: rotateY(90deg) translateZ(80px) rotateX(-30deg); }
-.inner .p4 { transform: rotateY(135deg) translateZ(80px) rotateX(-30deg); }
-.inner .p5 { transform: rotateY(180deg) translateZ(80px) rotateX(-30deg); }
-.inner .p6 { transform: rotateY(225deg) translateZ(80px) rotateX(-30deg); }
-.inner .p7 { transform: rotateY(270deg) translateZ(80px) rotateX(-30deg); }
-.inner .p8 { transform: rotateY(315deg) translateZ(80px) rotateX(-30deg); }
+.inner .p1 { transform: rotateY(0deg)   translateZ(80px) rotateX(-20deg); }
+.inner .p2 { transform: rotateY(45deg)  translateZ(80px) rotateX(-20deg); }
+.inner .p3 { transform: rotateY(90deg)  translateZ(80px) rotateX(-20deg); }
+.inner .p4 { transform: rotateY(135deg) translateZ(80px) rotateX(-20deg); }
+.inner .p5 { transform: rotateY(180deg) translateZ(80px) rotateX(-20deg); }
+.inner .p6 { transform: rotateY(225deg) translateZ(80px) rotateX(-20deg); }
+.inner .p7 { transform: rotateY(270deg) translateZ(80px) rotateX(-20deg); }
+.inner .p8 { transform: rotateY(315deg) translateZ(80px) rotateX(-20deg); }
 
-/* Outer Ring */
+/* Outer Ring — wide open petals that spread outward */
 .outer .petal {
-    width: 140px;
-    height: 200px;
-    left: -70px;
-    top: -200px; /* Bottom is at Y=0 */
-    background: linear-gradient(to top, #cc0033, #ff3366);
+    width: 155px;
+    height: 210px;
+    left: -77px;
+    top: -210px;
+    background: linear-gradient(160deg,
+        #ff88bb 0%,
+        #ff2266 25%,
+        #cc003a 60%,
+        #7a0020 100%);
 }
-.outer .p1 { transform: rotateY(22.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p2 { transform: rotateY(67.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p3 { transform: rotateY(112.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p4 { transform: rotateY(157.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p5 { transform: rotateY(202.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p6 { transform: rotateY(247.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p7 { transform: rotateY(292.5deg) translateZ(100px) rotateX(-50deg); }
-.outer .p8 { transform: rotateY(337.5deg) translateZ(100px) rotateX(-50deg); }
+.outer .p1 { transform: rotateY(22.5deg)  translateZ(110px) rotateX(-55deg); }
+.outer .p2 { transform: rotateY(67.5deg)  translateZ(110px) rotateX(-55deg); }
+.outer .p3 { transform: rotateY(112.5deg) translateZ(110px) rotateX(-55deg); }
+.outer .p4 { transform: rotateY(157.5deg) translateZ(110px) rotateX(-55deg); }
+.outer .p5 { transform: rotateY(202.5deg) translateZ(110px) rotateX(-55deg); }
+.outer .p6 { transform: rotateY(247.5deg) translateZ(110px) rotateX(-55deg); }
+.outer .p7 { transform: rotateY(292.5deg) translateZ(110px) rotateX(-55deg); }
+.outer .p8 { transform: rotateY(337.5deg) translateZ(110px) rotateX(-55deg); }
+
+
