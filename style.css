@@ -275,11 +275,11 @@ body {
     transform-style: preserve-3d;
 }
 .top-satellites {
-    top: -195px; /* Positions satellite so its tassel sits just above the middle body */
+    top: -180px; /* Orbits perfectly around the top patterned section */
     animation: satellitesSpinLeft 140s linear infinite;
 }
 .bottom-satellites {
-    top: 265px; /* Positions horizontal arm exactly at Y=240px (bottom border) */
+    top: 280px; /* Orbits perfectly around the 3D lotus flower base */
     animation: satellitesSpinRight 140s linear infinite;
 }
 .satellite {
@@ -429,8 +429,9 @@ body {
 .sat-bottom .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
 .sat-bottom .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
 
-/* Satellite Arm */
+/* Satellite Arm (Hidden as requested) */
 .satellite-arm {
+    display: none;
     position: absolute;
     width: 140px;
     height: 40px;
