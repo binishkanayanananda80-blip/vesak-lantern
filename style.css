@@ -270,16 +270,16 @@ body {
 /* Satellites */
 .satellites-container {
     position: absolute;
-    left: 0;
+    top: 50%; left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
 }
 .top-satellites {
-    top: -215px; /* Positions horizontal arm exactly at Y=-240px (top border) */
+    top: -228px; /* Original height */
     animation: satellitesSpinLeft 140s linear infinite;
 }
 .bottom-satellites {
-    top: 265px; /* Positions horizontal arm exactly at Y=240px (bottom border) */
+    top: 228px; /* Original height */
     animation: satellitesSpinRight 140s linear infinite;
 }
 .satellite {
