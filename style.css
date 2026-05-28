@@ -274,6 +274,12 @@ body {
     width: 0; height: 0;
     transform-style: preserve-3d;
 }
+.lantern-top .satellites-container {
+    top: 10%; /* Move up away from middle body */
+}
+.lantern-bottom .satellites-container {
+    top: 90%; /* Move down away from middle body */
+}
 .satellite {
     position: absolute;
     top: 0; left: 0;
@@ -425,18 +431,18 @@ body {
 .satellite-arm {
     position: absolute;
     width: 140px;
-    height: 80px;
-    border-top: 5px solid var(--glow-color);
+    height: 40px;
+    border-bottom: 5px solid var(--glow-color);
     border-right: 5px solid var(--glow-color);
-    border-top-right-radius: 80px;
+    border-bottom-right-radius: 40px;
     
-    top: -145px; /* Bottom of the arm is at -65px, which is the tip of the top pyramid */
-    left: -140px;
+    top: -65px; /* Top edge of arm matches the tip of the small lantern (-65px) */
+    left: -140px; /* Extends 140px towards the main lantern */
     
-    transform-origin: right bottom;
+    transform-origin: right top; /* Anchor rotation at the tip connection */
     transform: rotateY(-90deg); /* Points the arm inwards towards the main lantern */
     opacity: 0.9;
-    box-shadow: -2px -2px 5px var(--glow-color);
+    box-shadow: 2px 2px 5px var(--glow-color);
     filter: drop-shadow(0 0 5px var(--glow-color));
 }
 
