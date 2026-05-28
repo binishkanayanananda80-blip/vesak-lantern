@@ -837,7 +837,7 @@ body.small-off .tassel::before {
 .lotus-base {
     position: absolute;
     top: 250px; /* Positioned exactly beneath the main lantern */
-    left: 0;
+    left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
     /* Static, does not spin */
