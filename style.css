@@ -275,7 +275,7 @@ body {
     transform-style: preserve-3d;
 }
 .top-satellites {
-    top: -215px; /* Positions horizontal arm exactly at Y=-240px (top border) */
+    top: -240px; /* Aligns center of small lantern with top border */
     animation: satellitesSpinLeft 140s linear infinite;
 }
 .bottom-satellites {
@@ -446,6 +446,13 @@ body {
     opacity: 0.9;
     box-shadow: 2px 2px 5px var(--glow-color);
     filter: drop-shadow(0 0 5px var(--glow-color));
+}
+
+/* Custom arm for top satellites to reach the border while shifting further up */
+.top-satellites .satellite-arm {
+    height: 65px;
+    border-bottom-right-radius: 65px;
+    top: -65px; /* Connects to tip, extends down 65px to reach center line (border) */
 }
 
 
