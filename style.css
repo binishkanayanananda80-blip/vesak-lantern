@@ -523,6 +523,16 @@ body {
 .sat-7 { transform: rotateY(270deg) translateZ(280px); }
 .sat-8 { transform: rotateY(315deg) translateZ(280px); }
 
+/* Bottom satellites orbit further out so lotus flower is fully visible */
+.bottom-satellites .sat-1 { transform: rotateY(0deg) translateZ(380px); }
+.bottom-satellites .sat-2 { transform: rotateY(45deg) translateZ(380px); }
+.bottom-satellites .sat-3 { transform: rotateY(90deg) translateZ(380px); }
+.bottom-satellites .sat-4 { transform: rotateY(135deg) translateZ(380px); }
+.bottom-satellites .sat-5 { transform: rotateY(180deg) translateZ(380px); }
+.bottom-satellites .sat-6 { transform: rotateY(225deg) translateZ(380px); }
+.bottom-satellites .sat-7 { transform: rotateY(270deg) translateZ(380px); }
+.bottom-satellites .sat-8 { transform: rotateY(315deg) translateZ(380px); }
+
 /* Satellite Individual Colors - Buddhist Flag */
 .satellite.sat-1 { --panel-bg: rgba(0, 85, 164, 0.85); --glow-color: #0055A4; } /* Blue */
 .satellite.sat-2 { --panel-bg: rgba(239, 51, 64, 0.85); --glow-color: #EF3340; } /* Red */
