@@ -450,9 +450,9 @@ body {
 
 /* Custom arm for top satellites to reach the border while shifting further up */
 .top-satellites .satellite-arm {
-    height: 65px;
-    border-bottom-right-radius: 65px;
-    top: -65px; /* Connects to tip, extends down 65px to reach center line (border) */
+    height: 70px;
+    border-bottom-right-radius: 70px;
+    top: -70px; /* Connects exactly to the top tip of the satellite (-70px) */
 }
 
 
