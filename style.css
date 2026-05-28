@@ -275,11 +275,11 @@ body {
     transform-style: preserve-3d;
 }
 .top-satellites {
-    top: -228px; /* Original height */
+    top: -215px; /* Positions horizontal arm exactly at Y=-240px (top border) */
     animation: satellitesSpinLeft 140s linear infinite;
 }
 .bottom-satellites {
-    top: 228px; /* Original height */
+    top: 265px; /* Positions horizontal arm exactly at Y=240px (bottom border) */
     animation: satellitesSpinRight 140s linear infinite;
 }
 .satellite {
