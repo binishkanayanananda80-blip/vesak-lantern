@@ -275,11 +275,11 @@ body {
     transform-style: preserve-3d;
 }
 .top-satellites {
-    top: -180px; /* Orbits perfectly around the top patterned section */
+    top: -360px; /* Ring Y = lantern-bottom offset(180) + (-360) = -180px = center of top patterned section */
     animation: satellitesSpinLeft 140s linear infinite;
 }
 .bottom-satellites {
-    top: 280px; /* Orbits perfectly around the 3D lotus flower base */
+    top: 130px; /* Ring Y = 180 + 130 = 310px = center of the lotus flower */
     animation: satellitesSpinRight 140s linear infinite;
 }
 .satellite {
