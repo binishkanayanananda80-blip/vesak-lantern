@@ -442,7 +442,7 @@ body {
     left: -140px; /* Extends 140px towards the main lantern */
     
     transform-origin: right top; /* Anchor rotation at the tip connection */
-    transform: rotateY(-90deg); /* Points the arm inwards towards the main lantern */
+    /* Removed rotateY(-90deg) so it correctly points inwards along the local X axis */
     opacity: 0.9;
     box-shadow: 2px 2px 5px var(--glow-color);
     filter: drop-shadow(0 0 5px var(--glow-color));
