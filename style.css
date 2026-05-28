@@ -105,46 +105,57 @@ body {
 }
 
 /* Typography & Layout */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Top header bar */
 .hero-section {
-    text-align: center;
-    padding: 3rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 28px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+    z-index: 100;
     position: relative;
-    z-index: 10;
 }
 .main-title {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
+    font-size: 1.8rem;
     color: #fff;
-    text-shadow: 0 0 20px var(--glow-color);
-    margin-bottom: 0.5rem;
+    text-shadow: 0 0 16px var(--glow-color);
     letter-spacing: 2px;
+    margin: 0;
 }
-.subtitle {
-    font-size: 1.2rem;
-    font-weight: 300;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-}
-.badge {
-    display: inline-block;
-    padding: 0.3rem 1rem;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.top-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
 /* 3D Scene Setup */
 .scene {
     perspective: 1200px;
-    height: 800px;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -50px 0;
 }
+
 .lantern-assembly {
     position: relative;
     transform-style: preserve-3d;
@@ -627,62 +638,27 @@ body {
     background-color: rgba(50, 50, 50, 0.9);
 }
 
-/* Credit Belt */
-.credit-belt {
-    text-align: center;
-    background: var(--belt-bg);
-    color: #fff;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-family: var(--font-heading);
-    border-top: 2px solid rgba(255,215,0,0.5);
-    border-bottom: 2px solid rgba(255,215,0,0.5);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.8), 0 0 20px var(--glow-color);
-    width: fit-content;
-    margin: 40px auto;
-    border-radius: 50px;
-    position: relative;
-    z-index: 10;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-}
 
-/* Controls */
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin: 20px auto 60px;
-    max-width: 800px;
-    z-index: 10;
-    position: relative;
-}
-.btn, .select-btn {
-    padding: 12px 24px;
+/* Buttons (top-bar compact style) */
+.btn {
+    padding: 8px 20px;
     background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.3);
     color: #fff;
     border-radius: 30px;
     cursor: pointer;
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    white-space: nowrap;
 }
-.btn:hover, .select-btn:hover {
-    background: rgba(255,255,255,0.2);
+.btn:hover {
+    background: rgba(255,255,255,0.22);
     border-color: #fff;
     box-shadow: 0 0 15px var(--glow-color);
 }
-.select-btn {
-    appearance: none;
-    background: rgba(255,255,255,0.15) url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center;
-    padding-right: 40px;
-}
-.select-btn option {
-    background: #1a0b2e;
-    color: #fff;
-}
+
 
 /* Content Sections */
 .info-section {
