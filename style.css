@@ -1,0 +1,757 @@
+:root {
+    /* Base Variables */
+    --bg-night: radial-gradient(circle at center, #1a0b2e 0%, #05020a 100%);
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* 3D Variables */
+    --panel-w: 160px;
+    --panel-h: 240px;
+    --tz: 193px; /* (160 / 2) / tan(22.5) = 193.13 */
+    
+    --top-w: 120px;
+    --top-h: 120px;
+    --top-tz: 145px; /* (120 / 2) / tan(22.5) = 144.8 */
+    
+    --base-w: 120px;
+    --base-h: 120px;
+    --base-tz: 145px;
+    
+    --sat-w: 35px;
+    --sat-h: 50px;
+    --sat-tz: 42px;
+
+    /* Theme colors (Golden default) */
+    --glow-color: rgba(255, 215, 0, 0.8);
+    --panel-bg: rgba(255, 240, 180, 0.85);
+    --frame-color: #3e2723;
+    --text-color: #f7e7ce;
+    --belt-bg: linear-gradient(135deg, #b8860b, #5c4033);
+}
+
+/* Themes */
+.theme-golden {
+    --glow-color: rgba(255, 215, 0, 0.8);
+    --panel-bg: rgba(255, 240, 150, 0.9);
+    --frame-color: #3e2723;
+    --belt-bg: linear-gradient(135deg, #b8860b, #3e2723);
+}
+.theme-rainbow {
+    --glow-color: rgba(255, 255, 255, 0.6);
+    --frame-color: #111;
+    --belt-bg: linear-gradient(135deg, #8a2be2, #ff4500);
+}
+.theme-rainbow .lantern-middle .face:nth-child(1) { --panel-bg: rgba(255, 50, 50, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(2) { --panel-bg: rgba(255, 150, 50, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(3) { --panel-bg: rgba(255, 255, 50, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(4) { --panel-bg: rgba(50, 255, 50, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(5) { --panel-bg: rgba(50, 255, 255, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(6) { --panel-bg: rgba(50, 50, 255, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(7) { --panel-bg: rgba(150, 50, 255, 0.9); }
+.theme-rainbow .lantern-middle .face:nth-child(8) { --panel-bg: rgba(255, 50, 150, 0.9); }
+
+.theme-blue {
+    --glow-color: rgba(0, 150, 255, 0.8);
+    --panel-bg: rgba(180, 230, 255, 0.9);
+    --frame-color: #0b1d3a;
+    --belt-bg: linear-gradient(135deg, #005c99, #001a33);
+}
+.theme-purple {
+    --glow-color: rgba(180, 0, 255, 0.8);
+    --panel-bg: rgba(230, 180, 255, 0.9);
+    --frame-color: #2b0b3a;
+    --belt-bg: linear-gradient(135deg, #660099, #1a0033);
+}
+.theme-red {
+    --glow-color: rgba(255, 50, 50, 0.8);
+    --panel-bg: rgba(255, 180, 180, 0.9);
+    --frame-color: #4a0000;
+    --belt-bg: linear-gradient(135deg, #cc0000, #330000);
+    --text-color: #ffcccc;
+}
+
+/* Reset & Basics */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: var(--bg-night);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Background Particles Container */
+#background-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    animation: particleFloat 10s infinite linear;
+}
+@keyframes particleFloat {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+/* Typography & Layout */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+    position: relative;
+    z-index: 10;
+}
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 0 0 20px var(--glow-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+.badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 3D Scene Setup */
+.scene {
+    perspective: 1200px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -50px 0;
+}
+.lantern-assembly {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-5deg); /* Slight tilt for depth */
+}
+.lantern-top, .lantern-middle, .lantern-bottom {
+    position: absolute;
+    left: 50%;
+    transform-style: preserve-3d;
+}
+
+/* Main Body */
+.lantern-middle {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--panel-w);
+    height: var(--panel-h);
+    animation: choreoMiddle 120s ease-in-out infinite;
+}
+
+/* Top & Bottom Sections */
+.lantern-top {
+    top: -240px; /* Adjust based on heights */
+    transform: translateX(-50%);
+    width: var(--top-w);
+    height: var(--top-h);
+    animation: choreoTop 120s ease-in-out infinite;
+}
+.lantern-bottom {
+    top: 120px;
+    transform: translateX(-50%);
+    width: var(--base-w);
+    height: var(--base-h);
+    animation: choreoBottom 120s ease-in-out infinite;
+}
+
+/* Prism structure */
+.prism-octagon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--panel-bg);
+    border: 6px solid var(--frame-color);
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transition: background-color 1s ease;
+    /* Inner shadow for depth */
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 0 15px var(--glow-color);
+}
+.pattern {
+    width: 100%;
+    height: 100%;
+    /* Traditional mandala/floral pattern SVG */
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50,10 C60,40 90,50 90,50 C90,50 60,60 50,90 C40,60 10,50 10,50 C10,50 40,40 50,10 Z" fill="none" stroke="%233e2723" stroke-width="4"/><circle cx="50" cy="50" r="15" fill="none" stroke="%233e2723" stroke-width="3"/></svg>');
+    background-size: 50px 50px;
+    background-position: center;
+    background-repeat: repeat;
+    opacity: 0.85;
+}
+
+/* Apply transforms to 8 faces for main body */
+.lantern-middle .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--tz)); }
+.lantern-middle .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--tz)); }
+
+/* Lord Buddha's Life Cycle Story Images on the main faces */
+.lantern-middle .face:nth-child(1) .pattern { background-image: url('images/buddha_birth.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(2) .pattern { background-image: url('images/buddha_renunciation.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(3) .pattern { background-image: url('images/buddha_ascetic.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(4) .pattern { background-image: url('images/buddha_enlightenment.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(5) .pattern { background-image: url('images/buddha_sermon.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(6) .pattern { background-image: url('images/buddha_miracle.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(7) .pattern { background-image: url('images/buddha_elephant.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(8) .pattern { background-image: url('images/buddha_parinirvana.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+
+/* Apply transforms for top section */
+.lantern-top .face { border-width: 4px; box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px var(--glow-color); }
+.lantern-top .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--top-tz)); }
+.lantern-top .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--top-tz)); }
+
+/* Apply transforms for bottom section */
+.lantern-bottom .face { border-width: 4px; box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px var(--glow-color); }
+.lantern-bottom .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--base-tz)); }
+.lantern-bottom .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--base-tz)); }
+
+/* Internal Glow */
+.inner-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px; height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 100px 50px var(--glow-color), 0 0 200px 100px var(--glow-color);
+    animation: glowPulse 2s infinite alternate;
+    transition: opacity 0.5s ease;
+}
+
+/* Satellites */
+.satellites-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    transform-style: preserve-3d;
+}
+.satellite {
+    position: absolute;
+    top: 0; left: 0;
+    transform-style: preserve-3d;
+}
+.sat-body {
+    width: var(--sat-w);
+    height: var(--sat-h);
+    transform: translate(-50%, -50%);
+    animation: selfSpin 20s linear infinite;
+    transform-style: preserve-3d;
+}
+@keyframes selfSpin {
+    0% { transform: translate(-50%, -50%) rotateY(0deg); }
+    100% { transform: translate(-50%, -50%) rotateY(360deg); }
+}
+.sat-body .face {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 2px solid var(--frame-color);
+    box-sizing: border-box;
+    backface-visibility: visible !important; /* Forces back faces to render */
+    overflow: visible !important; /* Allow border tassels to hang outside */
+    animation: satHardBlink 6s infinite;
+}
+
+/* Bodhi Leaf Illustration on each face */
+.sat-body .face::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    height: 65%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,95 Q50,70 80,55 C100,40 90,10 50,20 C10,10 0,40 20,55 Q50,70 50,95 Z" fill="%23ffffff" opacity="0.75"/><path d="M50,20 L50,85 M50,70 L35,60 M50,55 L65,45 M50,40 L35,30" stroke="%23ffffff" stroke-width="3" fill="none" opacity="0.9"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.85;
+}
+
+/* Border tassels around the bottom of each small face */
+.sat-body .face::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -2px; /* compensate for 2px border */
+    width: calc(100% + 4px);
+    height: 20px;
+    background: linear-gradient(to bottom, 
+        #0055A4 0%, #0055A4 20%, 
+        #FFD100 20%, #FFD100 40%, 
+        #FFFFFF 40%, #FFFFFF 60%, 
+        #FF6700 60%, #FF6700 80%,
+        #EF3340 80%, #EF3340 100%
+    );
+    -webkit-mask-image: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 1.5px,
+        transparent 1.5px,
+        transparent 3px
+    );
+    mask-image: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 1.5px,
+        transparent 1.5px,
+        transparent 3px
+    );
+    transform-origin: top center;
+    animation: borderFringeSwing 2s ease-in-out infinite alternate;
+    opacity: 0.9;
+}
+.sat-body .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+.sat-body .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--sat-tz)); background-color: var(--panel-bg); }
+
+
+.tassel {
+    position: absolute;
+    top: 25px; /* Sits right at the bottom of the 50px high satellite */
+    left: 0;
+    width: 28px;
+    height: 45px;
+    transform: translateX(-50%);
+    transform-origin: top center;
+    animation: tasselSwing 3s ease-in-out infinite alternate;
+    /* Traditional Buddhist Flag Colors */
+    background: linear-gradient(to bottom, 
+        #0055A4 0%, #0055A4 20%, 
+        #FFD100 20%, #FFD100 40%, 
+        #FFFFFF 40%, #FFFFFF 60%, 
+        #FF6700 60%, #FF6700 80%,
+        #EF3340 80%, #EF3340 100%
+    );
+    -webkit-mask-image: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    mask-image: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    opacity: 0.95;
+}
+.tassel::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 6px;
+    border-radius: 4px;
+    background: var(--glow-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
+.tassel::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to bottom, transparent, var(--glow-color));
+    opacity: 0.5;
+}
+/* Position satellites around */
+.lantern-top .sat-1 { transform: rotateY(0deg) translateZ(280px); }
+.lantern-top .sat-2 { transform: rotateY(45deg) translateZ(280px); }
+.lantern-top .sat-3 { transform: rotateY(90deg) translateZ(280px); }
+.lantern-top .sat-4 { transform: rotateY(135deg) translateZ(280px); }
+.lantern-top .sat-5 { transform: rotateY(180deg) translateZ(280px); }
+.lantern-top .sat-6 { transform: rotateY(225deg) translateZ(280px); }
+.lantern-top .sat-7 { transform: rotateY(270deg) translateZ(280px); }
+.lantern-top .sat-8 { transform: rotateY(315deg) translateZ(280px); }
+
+.lantern-bottom .sat-1 { transform: rotateY(0deg) translateZ(280px); }
+.lantern-bottom .sat-2 { transform: rotateY(45deg) translateZ(280px); }
+.lantern-bottom .sat-3 { transform: rotateY(90deg) translateZ(280px); }
+.lantern-bottom .sat-4 { transform: rotateY(135deg) translateZ(280px); }
+.lantern-bottom .sat-5 { transform: rotateY(180deg) translateZ(280px); }
+.lantern-bottom .sat-6 { transform: rotateY(225deg) translateZ(280px); }
+.lantern-bottom .sat-7 { transform: rotateY(270deg) translateZ(280px); }
+.lantern-bottom .sat-8 { transform: rotateY(315deg) translateZ(280px); }
+
+/* Satellite Individual Colors - Buddhist Flag */
+.satellite.sat-1 { --panel-bg: rgba(0, 85, 164, 0.85); --glow-color: #0055A4; } /* Blue */
+.satellite.sat-2 { --panel-bg: rgba(239, 51, 64, 0.85); --glow-color: #EF3340; } /* Red */
+.satellite.sat-3 { --panel-bg: rgba(255, 255, 255, 0.85); --glow-color: #FFFFFF; } /* White */
+.satellite.sat-4 { --panel-bg: rgba(255, 209, 0, 0.85); --glow-color: #FFD100; } /* Yellow */
+.satellite.sat-5 { --panel-bg: rgba(255, 103, 0, 0.85); --glow-color: #FF6700; } /* Orange */
+.satellite.sat-6 { --panel-bg: rgba(0, 85, 164, 0.85); --glow-color: #0055A4; } /* Blue */
+.satellite.sat-7 { --panel-bg: rgba(239, 51, 64, 0.85); --glow-color: #EF3340; } /* Red */
+.satellite.sat-8 { --panel-bg: rgba(255, 255, 255, 0.85); --glow-color: #FFFFFF; } /* White */
+
+
+/* Animations */
+@keyframes floatLantern {
+    0% { transform: rotateX(-5deg) translateY(0); }
+    50% { transform: rotateX(-5deg) translateY(-20px); }
+    100% { transform: rotateX(-5deg) translateY(0); }
+}
+@keyframes glowPulse {
+    0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.9); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+@keyframes satHardBlink {
+    0%, 83.33% { 
+        background-color: var(--panel-bg); 
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 25px var(--glow-color); 
+        opacity: 0.9;
+    }
+    83.34%, 100% { 
+        background-color: rgba(20,20,20,0.95); 
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.9); 
+        opacity: 0.95;
+    }
+}
+@keyframes tasselSwing {
+    0% { transform: translateX(-50%) rotate(10deg); }
+    100% { transform: translateX(-50%) rotate(-10deg); }
+}
+@keyframes borderFringeSwing {
+    0% { transform: rotateX(5deg); }
+    100% { transform: rotateX(30deg); }
+}
+
+/* Choreographed Cycle */
+@keyframes choreoTop {
+    0% { transform: translateX(-50%) rotateY(0deg); }
+    33.33% { transform: translateX(-50%) rotateY(360deg); }
+    100% { transform: translateX(-50%) rotateY(360deg); }
+}
+@keyframes choreoBottom {
+    0% { transform: translateX(-50%) rotateY(0deg); }
+    33.33% { transform: translateX(-50%) rotateY(-360deg); }
+    100% { transform: translateX(-50%) rotateY(-360deg); }
+}
+@keyframes choreoMiddle {
+    0% { transform: translate(-50%, -50%) rotateY(0deg); }
+    33.33% { transform: translate(-50%, -50%) rotateY(0deg); }
+    66.66% { transform: translate(-50%, -50%) rotateY(360deg); }
+    100% { transform: translate(-50%, -50%) rotateY(0deg); }
+}
+/* For satellites container */
+.lantern-top .satellites-container {
+    animation: satellitesSpinLeft 140s linear infinite;
+}
+.lantern-bottom .satellites-container {
+    animation: satellitesSpinRight 140s linear infinite;
+}
+@keyframes satellitesSpinLeft {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(-360deg); }
+}
+@keyframes satellitesSpinRight {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Paused State */
+.paused .spinning-right,
+.paused .spinning-left,
+.paused .lantern-assembly,
+.paused .satellites-container {
+    animation-play-state: paused !important;
+}
+
+/* Lights off state */
+.lights-off .inner-glow {
+    opacity: 0 !important;
+}
+.lights-off .face {
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+    background-color: rgba(30, 30, 30, 0.9);
+}
+.lights-off .main-title {
+    text-shadow: none;
+}
+.lights-off .sat-body {
+    box-shadow: none;
+    background-color: rgba(50, 50, 50, 0.9);
+}
+
+/* Credit Belt */
+.credit-belt {
+    text-align: center;
+    background: var(--belt-bg);
+    color: #fff;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    border-top: 2px solid rgba(255,215,0,0.5);
+    border-bottom: 2px solid rgba(255,215,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8), 0 0 20px var(--glow-color);
+    width: fit-content;
+    margin: 40px auto;
+    border-radius: 50px;
+    position: relative;
+    z-index: 10;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px auto 60px;
+    max-width: 800px;
+    z-index: 10;
+    position: relative;
+}
+.btn, .select-btn {
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+.btn:hover, .select-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: #fff;
+    box-shadow: 0 0 15px var(--glow-color);
+}
+.select-btn {
+    appearance: none;
+    background: rgba(255,255,255,0.15) url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center;
+    padding-right: 40px;
+}
+.select-btn option {
+    background: #1a0b2e;
+    color: #fff;
+}
+
+/* Content Sections */
+.info-section {
+    max-width: 1000px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+.about-section {
+    margin-bottom: 60px;
+}
+.info-section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--glow-color);
+    margin-bottom: 20px;
+}
+.about-section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.symbolism-section .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+.card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px var(--glow-color);
+}
+.card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+.card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.5);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+/* Long Main Tassels */
+.main-tassels {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform-style: preserve-3d;
+}
+.long-tassel {
+    position: absolute;
+    width: 80px;
+    height: 200px;
+    transform-origin: top center;
+    /* Traditional Buddhist Flag Colors */
+    background: linear-gradient(to bottom, 
+        #0055A4 0%, #0055A4 20%, 
+        #FFD100 20%, #FFD100 40%, 
+        #FFFFFF 40%, #FFFFFF 60%, 
+        #FF6700 60%, #FF6700 80%,
+        #EF3340 80%, #EF3340 100%
+    );
+    -webkit-mask-image: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    mask-image: repeating-linear-gradient(
+        to right,
+        black 0px,
+        black 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    opacity: 0.95;
+    animation: longWave 3.5s ease-in-out infinite alternate;
+}
+.long-tassel::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 14px;
+    border-radius: 7px;
+    background: var(--glow-color);
+    box-shadow: 0 0 15px var(--glow-color), inset 0 0 5px rgba(255,255,255,0.8);
+    border: 2px solid var(--frame-color);
+}
+.long-tassel::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--glow-color));
+    opacity: 0.8;
+}
+@keyframes longWave {
+    0% { transform: translateX(-50%) rotateY(var(--ry)) translateZ(var(--base-tz)) rotateX(2deg) rotateZ(2deg); }
+    100% { transform: translateX(-50%) rotateY(var(--ry)) translateZ(var(--base-tz)) rotateX(25deg) rotateZ(-3deg); }
+}
+/* Alternating Light Sequence Logic */
+body.middle-off .lantern-middle .face {
+    background-color: rgba(200, 200, 200, 0.3) !important; /* Dim backlight */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.6) !important; /* Soft edge shadows */
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+body.middle-off .lantern-middle .inner-glow {
+    opacity: 0.3 !important; /* Keep a faint glow */
+    transition: opacity 0.5s;
+}
+
+body.small-off .sat-body .face {
+    animation: none !important;
+    background-color: rgba(10,10,10,0.95) !important;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.9) !important;
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+body.small-off .sat-body .face::after,
+body.small-off .tassel,
+body.small-off .tassel::before {
+    filter: brightness(0.1) grayscale(0.9) !important;
+    transition: filter 0.5s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .scene { height: 600px; transform: scale(0.7); }
+    .main-title { font-size: 2.5rem; }
+    .controls { gap: 10px; }
+    .btn, .select-btn { padding: 10px 15px; font-size: 0.9rem; }
+    .credit-belt { font-size: 1rem; padding: 12px 25px; margin: 0 auto 30px; }
+}
+@media (max-width: 480px) {
+    .scene { height: 500px; transform: scale(0.5); }
+    .main-title { font-size: 2rem; }
+}
