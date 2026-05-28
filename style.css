@@ -277,8 +277,8 @@ body {
 .satellite {
     position: absolute;
     top: 0; left: 0;
-    --sat-top-h: 25px;
-    --sat-bottom-h: 25px;
+    --sat-top-h: 40px;
+    --sat-bottom-h: 40px;
     transform-style: preserve-3d;
 }
 .satellite-lantern {
@@ -392,61 +392,52 @@ body {
     animation: satHardBlink 6s infinite;
 }
 .sat-top .face {
-    height: 49px; /* Slant height to reach center */
+    height: 58px; /* Slant height to reach center */
     bottom: 0;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     transform-origin: bottom center;
 }
 .sat-bottom .face {
-    height: 49px; /* Slant height to reach center */
+    height: 58px; /* Slant height to reach center */
     top: 0;
     clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     transform-origin: top center;
 }
-.sat-top .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--sat-tz)) rotateX(59deg); }
-.sat-top .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--sat-tz)) rotateX(59deg); }
+.sat-top .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--sat-tz)) rotateX(46deg); }
+.sat-top .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--sat-tz)) rotateX(46deg); }
 
-.sat-bottom .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
-.sat-bottom .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--sat-tz)) rotateX(-59deg); }
+.sat-bottom .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(4) { transform: rotateY(135deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(5) { transform: rotateY(180deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(6) { transform: rotateY(225deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(7) { transform: rotateY(270deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
+.sat-bottom .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--sat-tz)) rotateX(-46deg); }
 
 /* Satellite Arm */
 .satellite-arm {
     position: absolute;
-    width: 80px;
-    height: 120px;
+    width: 140px;
+    height: 80px;
     border-top: 5px solid var(--glow-color);
-    border-left: 5px solid var(--glow-color);
-    border-top-left-radius: 60px;
-    top: -20px;
-    left: -80px;
-    transform-origin: right center;
-    transform: rotateY(0deg) translateZ(-42px); /* Anchor to the back of the satellite so it connects to the main lantern */
+    border-right: 5px solid var(--glow-color);
+    border-top-right-radius: 80px;
+    
+    top: -145px; /* Bottom of the arm is at -65px, which is the tip of the top pyramid */
+    left: -140px;
+    
+    transform-origin: right bottom;
+    transform: rotateY(-90deg); /* Points the arm inwards towards the main lantern */
     opacity: 0.9;
     box-shadow: -2px -2px 5px var(--glow-color);
     filter: drop-shadow(0 0 5px var(--glow-color));
-}
-.satellite-arm::after {
-    content: '';
-    position: absolute;
-    bottom: -115px; /* Offset to connect nicely */
-    right: -5px; /* Adjust for border width */
-    width: 80px;
-    height: 120px;
-    border-bottom: 5px solid var(--glow-color);
-    border-right: 5px solid var(--glow-color);
-    border-bottom-right-radius: 60px;
 }
 
 
