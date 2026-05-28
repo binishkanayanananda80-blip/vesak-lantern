@@ -159,7 +159,7 @@ main {
 .lantern-assembly {
     position: relative;
     transform-style: preserve-3d;
-    transform: scale(0.8) translateY(-80px) rotateX(-5deg); /* Scaled up to 0.8, adjusted Y to balance top/bottom */
+    transform: scale(0.8) translateY(-30px) rotateX(-5deg); /* Moved down slightly to avoid top nav bar clipping */
 }
 .lantern-top, .lantern-middle, .lantern-bottom {
     position: absolute;
