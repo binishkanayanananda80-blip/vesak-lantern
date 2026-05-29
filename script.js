@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             /* ─ Satellite self-spin (2.0X) ─ */
             const satA = (elapsed * SAT_SPEED) % 360;
             satLants.forEach(sl => {
-                sl.style.transform = `rotateY(${satA}deg)`;
+                sl.style.transform = `translateZ(0.1px) rotateY(${satA}deg)`;
             });
 
             /* ─ Satellite continuous orbit (0.5X) ─ */
