@@ -180,7 +180,6 @@ main {
     position: absolute;
     width: 0; height: 0;
     transform-style: preserve-3d;
-    animation: phase1_wrapper 150s ease-in-out infinite;
 }
 
 @keyframes phase1_wrapper {
@@ -198,7 +197,8 @@ main {
 }
 
 @keyframes phase3_middle {
-    0%, 40%, 60%, 100% { transform: translate(-50%, -50%) rotateY(0deg); }
+    0%, 20%, 40%, 60%, 100% { transform: translate(-50%, -50%) rotateY(0deg); }
+    10% { transform: translate(-50%, -50%) rotateY(-135deg); }
     50% { transform: translate(-50%, -50%) rotateY(135deg); }
 }
 
@@ -213,7 +213,7 @@ main {
 
 @keyframes phase2_top {
     0%, 20%, 40%, 100% { transform: translateX(-50%) rotateY(0deg); }
-    30% { transform: translateX(-50%) rotateY(-135deg); }
+    10%, 30% { transform: translateX(-50%) rotateY(-135deg); }
 }
 
 .lantern-bottom {
@@ -226,6 +226,7 @@ main {
 
 @keyframes phase2_bottom {
     0%, 20%, 40%, 100% { transform: translateX(-50%) rotateY(0deg); }
+    10% { transform: translateX(-50%) rotateY(-135deg); }
     30% { transform: translateX(-50%) rotateY(135deg); }
 }
 
@@ -243,7 +244,7 @@ main {
     background-color: var(--panel-bg);
     border: 6px solid var(--frame-color);
     box-sizing: border-box;
-    backface-visibility: visible;
+    backface-visibility: hidden;
     overflow: hidden;
     transition: background-color 1.5s ease, box-shadow 1.5s ease, border-color 1.5s ease;
     /* Inner shadow for depth */
@@ -328,13 +329,9 @@ main {
 }
 
 @keyframes satellites_top_orbit {
-    0%, 40% { transform: rotateY(0deg); }
-    50% { transform: rotateY(135deg); }
-    60% { transform: rotateY(0deg); }
-    70% { transform: rotateY(135deg); }
-    80% { transform: rotateY(0deg); }
-    90% { transform: rotateY(-135deg); }
-    100% { transform: rotateY(0deg); }
+    0%, 20%, 40%, 60%, 80%, 100% { transform: rotateY(0deg); }
+    10%, 30%, 90% { transform: rotateY(-135deg); }
+    50%, 70% { transform: rotateY(135deg); }
 }
 
 .bottom-satellites {
@@ -343,13 +340,9 @@ main {
 }
 
 @keyframes satellites_bottom_orbit {
-    0%, 40% { transform: rotateY(0deg); }
-    50% { transform: rotateY(-135deg); }
-    60% { transform: rotateY(0deg); }
-    70% { transform: rotateY(-135deg); }
-    80% { transform: rotateY(0deg); }
-    90% { transform: rotateY(-135deg); }
-    100% { transform: rotateY(0deg); }
+    0%, 20%, 40%, 60%, 80%, 100% { transform: rotateY(0deg); }
+    10%, 50%, 70%, 90% { transform: rotateY(-135deg); }
+    30% { transform: rotateY(135deg); }
 }
 .satellite {
     position: absolute;
