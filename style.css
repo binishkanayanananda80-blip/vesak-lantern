@@ -194,7 +194,7 @@ main {
     transform: translate3d(-50%, -50%, 0);
     width: var(--panel-w);
     height: var(--panel-h);
-    animation: phase3_middle 150s linear infinite;
+    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes phase3_middle {
@@ -209,7 +209,7 @@ main {
     transform: translate3d(-50%, 0, 0);
     width: var(--top-w);
     height: var(--top-h);
-    animation: phase2_top 150s linear infinite;
+    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes phase2_top {
@@ -222,7 +222,7 @@ main {
     transform: translate3d(-50%, 0, 0);
     width: var(--base-w);
     height: var(--base-h);
-    animation: phase2_bottom 150s linear infinite;
+    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes phase2_bottom {
@@ -326,7 +326,7 @@ main {
 }
 .top-satellites {
     top: -240px; /* Adjusted after moving out of lantern-bottom */
-    animation: satellites_top_orbit 150s linear infinite;
+    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes satellites_top_orbit {
@@ -337,7 +337,7 @@ main {
 
 .bottom-satellites {
     top: 210px; /* Adjusted after moving out of lantern-bottom */
-    animation: satellites_bottom_orbit 150s linear infinite;
+    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes satellites_bottom_orbit {
@@ -356,7 +356,7 @@ main {
     position: absolute;
     top: 0; left: 0;
     transform-style: preserve-3d;
-    animation: fastAxisSpin 3s linear infinite;
+    /* self-spin handled by JS requestAnimationFrame engine */
 }
 
 @keyframes fastAxisSpin {
