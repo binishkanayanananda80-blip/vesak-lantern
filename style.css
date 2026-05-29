@@ -295,6 +295,7 @@ main {
 }
 
 /* Apply transforms to 8 faces for main body */
+.lantern-middle .face { box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 0 15px var(--glow-color); }
 .lantern-middle .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--tz)); }
 .lantern-middle .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--tz)); }
 .lantern-middle .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--tz)); }
@@ -315,7 +316,7 @@ main {
 .lantern-middle .face:nth-child(8) .pattern { background-image: url('images/buddha_parinirvana.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
 
 /* Apply transforms for top section */
-.lantern-top .face { border-width: 4px; }
+.lantern-top .face { border-width: 4px; box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px var(--glow-color); }
 .lantern-top .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--top-tz)); }
 .lantern-top .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--top-tz)); }
 .lantern-top .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--top-tz)); }
@@ -326,7 +327,7 @@ main {
 .lantern-top .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--top-tz)); }
 
 /* Apply transforms for bottom section */
-.lantern-bottom .face { border-width: 4px; }
+.lantern-bottom .face { border-width: 4px; box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px var(--glow-color); }
 .lantern-bottom .face:nth-child(1) { transform: rotateY(0deg) translateZ(var(--base-tz)); }
 .lantern-bottom .face:nth-child(2) { transform: rotateY(45deg) translateZ(var(--base-tz)); }
 .lantern-bottom .face:nth-child(3) { transform: rotateY(90deg) translateZ(var(--base-tz)); }
