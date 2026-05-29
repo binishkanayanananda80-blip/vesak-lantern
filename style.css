@@ -200,13 +200,19 @@ main {
 }
 
 @keyframes mainSweepMid {
-    0% { transform: translate3d(0,0,0) rotateY(0deg); }
-    14.285% { transform: translate3d(0,0,0) rotateY(-180deg); }
-    28.571% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 1 (0-15s): HOLD STATIC */
+    0%, 14.285% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 2 (15-30s): ALL LEFT */
+    28.571% { transform: translate3d(0,0,0) rotateY(-180deg); }
+    /* Phase 3 (30-45s): ALL CENTER */
     42.857% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 4 (45-60s): TOP/BOT SPLIT (Mid stays center) */
     57.142% { transform: translate3d(0,0,0) rotateY(0deg); }
-    71.428% { transform: translate3d(0,0,0) rotateY(180deg); }
-    85.714% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 5 (60-75s): ALL CENTER */
+    71.428% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 6 (75-90s): MID RIGHT */
+    85.714% { transform: translate3d(0,0,0) rotateY(180deg); }
+    /* Phase 7 (90-105s): ALL CENTER */
     100% { transform: translate3d(0,0,0) rotateY(0deg); }
 }
 
@@ -227,13 +233,19 @@ main {
 }
 
 @keyframes mainSweepTop {
-    0% { transform: translate3d(0,0,0) rotateY(0deg); }
-    14.285% { transform: translate3d(0,0,0) rotateY(-180deg); }
-    28.571% { transform: translate3d(0,0,0) rotateY(0deg); }
-    42.857% { transform: translate3d(0,0,0) rotateY(-180deg); }
-    57.142% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 1 (0-15s): HOLD STATIC */
+    0%, 14.285% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 2 (15-30s): ALL LEFT */
+    28.571% { transform: translate3d(0,0,0) rotateY(-180deg); }
+    /* Phase 3 (30-45s): ALL CENTER */
+    42.857% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 4 (45-60s): TOP LEFT */
+    57.142% { transform: translate3d(0,0,0) rotateY(-180deg); }
+    /* Phase 5 (60-75s): ALL CENTER */
     71.428% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 6 (75-90s): MID RIGHT (Top stays center) */
     85.714% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 7 (90-105s): ALL CENTER */
     100% { transform: translate3d(0,0,0) rotateY(0deg); }
 }
 
@@ -252,13 +264,19 @@ main {
 }
 
 @keyframes mainSweepBottom {
-    0% { transform: translate3d(0,0,0) rotateY(0deg); }
-    14.285% { transform: translate3d(0,0,0) rotateY(-180deg); }
-    28.571% { transform: translate3d(0,0,0) rotateY(0deg); }
-    42.857% { transform: translate3d(0,0,0) rotateY(180deg); }
-    57.142% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 1 (0-15s): HOLD STATIC */
+    0%, 14.285% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 2 (15-30s): ALL LEFT */
+    28.571% { transform: translate3d(0,0,0) rotateY(-180deg); }
+    /* Phase 3 (30-45s): ALL CENTER */
+    42.857% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 4 (45-60s): BOT RIGHT */
+    57.142% { transform: translate3d(0,0,0) rotateY(180deg); }
+    /* Phase 5 (60-75s): ALL CENTER */
     71.428% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 6 (75-90s): MID RIGHT (Bot stays center) */
     85.714% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 7 (90-105s): ALL CENTER */
     100% { transform: translate3d(0,0,0) rotateY(0deg); }
 }
 
@@ -922,13 +940,23 @@ body.small-off .tassel::before {
     left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
+    animation: lotus_base_orbit 105s ease-in-out infinite;
 }
 
 @keyframes lotus_base_orbit {
-    0%, 60% { transform: translate3d(0,0,0) rotateY(0deg); }
-    70% { transform: translate3d(0,0,0) rotateY(-135deg); }
-    80% { transform: translate3d(0,0,0) rotateY(0deg); }
-    90% { transform: translate3d(0,0,0) rotateY(-135deg); }
+    /* Phase 1 (0-15s): HOLD STATIC */
+    0%, 14.285% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 2 (15-30s): ALL LEFT */
+    28.571% { transform: translate3d(0,0,0) rotateY(-180deg); }
+    /* Phase 3 (30-45s): ALL CENTER */
+    42.857% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 4 (45-60s): BOT RIGHT */
+    57.142% { transform: translate3d(0,0,0) rotateY(180deg); }
+    /* Phase 5 (60-75s): ALL CENTER */
+    71.428% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 6 (75-90s): MID RIGHT (Bot stays center) */
+    85.714% { transform: translate3d(0,0,0) rotateY(0deg); }
+    /* Phase 7 (90-105s): ALL CENTER */
     100% { transform: translate3d(0,0,0) rotateY(0deg); }
 }
 .lotus-center {
