@@ -426,6 +426,7 @@ main {
     box-sizing: border-box;
     backface-visibility: visible !important; /* Forces back faces to render */
     overflow: visible !important; /* Allow border tassels to hang outside */
+    animation: satHardBlink 6s infinite;
 }
 
 /* Bodhi Leaf Illustration on each face */
@@ -491,7 +492,6 @@ main {
     position: absolute;
     width: 100%;
     background-color: var(--panel-bg);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 10px var(--glow-color);
     box-sizing: border-box;
     backface-visibility: hidden;
     animation: satHardBlink 6s infinite;
@@ -654,12 +654,10 @@ main {
 @keyframes satHardBlink {
     0%, 83.33% { 
         background-color: var(--panel-bg); 
-        box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 25px var(--glow-color); 
         opacity: 0.9;
     }
     83.34%, 100% { 
         background-color: rgba(20,20,20,0.95); 
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.9); 
         opacity: 0.95;
     }
 }
