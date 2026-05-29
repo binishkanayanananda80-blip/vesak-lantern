@@ -887,7 +887,7 @@ body.small-off .tassel::before {
 /* 3D Lotus Base */
 .lotus-base {
     position: absolute;
-    top: 330px; /* 120px (lantern-bottom top) + 210px (previous top inside lantern-bottom) */
+    top: 210px; /* lantern-bottom starts at 120px, height 120px; lotus sits 30px inside bottom edge to cup it */
     left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
