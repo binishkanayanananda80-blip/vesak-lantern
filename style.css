@@ -358,8 +358,6 @@ main {
     position: absolute;
     top: 0; left: 0;
     transform-style: preserve-3d;
-    transform: rotateY(0deg);
-    animation: fastAxisSpin 1.5s linear infinite;
 }
 
 @keyframes fastAxisSpin {

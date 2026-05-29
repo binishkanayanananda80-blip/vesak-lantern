@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ─────────────────────────────────────────────────────────────── */
     (function lanternSpinEngine() {
         const CYCLE     = 90;    // 6 phases * 15s per phase
+        const SAT_SPEED = 360;   // 2X satellite self-spin (360 degrees per second)
         const MAIN_SPEED = 12;   // 0.50X for main structure sweeps (180 degrees in 15s)
         const ORBIT_SPEED = 18;  // 0.5X for satellite continuous orbit
 
@@ -110,6 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!startTime) startTime = ts;
             const elapsed = (ts - startTime) / 1000;  
             const t = elapsed % CYCLE;                 
+
+            /* ─ Satellite self-spin (2.0X) ─ */
+            const satA = (elapsed * SAT_SPEED) % 360;
+            satLants.forEach(sl => {
+                sl.style.transform = `rotateY(${satA}deg)`;
+            });
 
             /* ─ Satellite continuous orbit (0.5X) ─ */
             const tsY = (elapsed * ORBIT_SPEED) % 360;   // Top right
