@@ -172,7 +172,6 @@ main {
 }
 .lantern-top, .lantern-middle, .lantern-bottom {
     position: absolute;
-    left: 50%;
     transform-style: preserve-3d;
 }
 
@@ -191,10 +190,11 @@ main {
 /* Main Body */
 .lantern-middle {
     top: 50%;
-    transform: translate3d(-50%, -50%, 0);
+    left: 50%;
+    margin-left: calc(var(--panel-w) / -2);
+    margin-top: calc(var(--panel-h) / -2);
     width: var(--panel-w);
     height: var(--panel-h);
-    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes phase3_middle {
@@ -206,10 +206,10 @@ main {
 /* Top & Bottom Sections */
 .lantern-top {
     top: -240px; /* Adjust based on heights */
-    transform: translate3d(-50%, 0, 0);
+    left: 50%;
+    margin-left: calc(var(--top-w) / -2);
     width: var(--top-w);
     height: var(--top-h);
-    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes phase2_top {
@@ -219,10 +219,10 @@ main {
 
 .lantern-bottom {
     top: 120px;
-    transform: translate3d(-50%, 0, 0);
+    left: 50%;
+    margin-left: calc(var(--base-w) / -2);
     width: var(--base-w);
     height: var(--base-h);
-    /* animation handled by JS requestAnimationFrame engine */
 }
 
 @keyframes phase2_bottom {
@@ -273,14 +273,14 @@ main {
 .lantern-middle .face:nth-child(8) { transform: rotateY(315deg) translateZ(var(--tz)); }
 
 /* Lord Buddha's Life Cycle Story Images on the main faces */
-.lantern-middle .face:nth-child(1) .pattern { background-image: url('images/buddha_birth.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(2) .pattern { background-image: url('images/buddha_renunciation.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(3) .pattern { background-image: url('images/buddha_ascetic.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(4) .pattern { background-image: url('images/buddha_enlightenment.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(5) .pattern { background-image: url('images/buddha_sermon.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(6) .pattern { background-image: url('images/buddha_miracle.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(7) .pattern { background-image: url('images/buddha_elephant.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
-.lantern-middle .face:nth-child(8) .pattern { background-image: url('images/buddha_parinirvana.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+.lantern-middle .face:nth-child(1) .pattern { background-image: url('images/buddha_birth.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(2) .pattern { background-image: url('images/buddha_renunciation.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(3) .pattern { background-image: url('images/buddha_ascetic.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(4) .pattern { background-image: url('images/buddha_enlightenment.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(5) .pattern { background-image: url('images/buddha_sermon.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(6) .pattern { background-image: url('images/buddha_miracle.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(7) .pattern { background-image: url('images/buddha_elephant.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
+.lantern-middle .face:nth-child(8) .pattern { background-image: url('images/buddha_parinirvana.png'); background-size: cover; background-repeat: no-repeat; opacity: 0.9; }
 
 /* Apply transforms for top section */
 .lantern-top .face { border-width: 4px; box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px var(--glow-color); }

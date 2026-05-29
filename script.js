@@ -156,11 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             /* ─ Apply transforms directly ─ */
-            elTop.style.transform    = `translate3d(-50%,0,0) rotateY(${tY.toFixed(2)}deg)`;
-            elMid.style.transform    = `translate3d(-50%,-50%,0) rotateY(${mY.toFixed(2)}deg)`;
-            elBot.style.transform    = `translate3d(-50%,0,0) rotateY(${bY.toFixed(2)}deg)`;
-            if(elTopSat) elTopSat.style.transform = `translate3d(0,0,0) rotateY(${tsY.toFixed(2)}deg)`;
-            if(elBotSat) elBotSat.style.transform = `translate3d(0,0,0) rotateY(${bsY.toFixed(2)}deg)`;
+            elTop.style.transform    = `rotateY(${tY.toFixed(2)}deg)`;
+            elMid.style.transform    = `rotateY(${mY.toFixed(2)}deg)`;
+            elBot.style.transform    = `rotateY(${bY.toFixed(2)}deg)`;
+            if(elTopSat) elTopSat.style.transform = `rotateY(${tsY.toFixed(2)}deg)`;
+            if(elBotSat) elBotSat.style.transform = `rotateY(${bsY.toFixed(2)}deg)`;
 
             requestAnimationFrame(frame);
         }
