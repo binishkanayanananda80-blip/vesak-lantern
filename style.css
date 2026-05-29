@@ -356,7 +356,7 @@ main {
     position: absolute;
     top: 0; left: 0;
     transform-style: preserve-3d;
-    animation: fastAxisSpin 1s linear infinite;
+    animation: fastAxisSpin 10s linear infinite;
 }
 
 @keyframes fastAxisSpin {
