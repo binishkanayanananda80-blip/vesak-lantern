@@ -324,7 +324,7 @@ main {
     transform-style: preserve-3d;
 }
 .top-satellites {
-    top: -360px; /* Ring Y = lantern-bottom offset(180) + (-360) = -180px = center of top patterned section */
+    top: -240px; /* Adjusted after moving out of lantern-bottom */
     animation: satellites_top_orbit 150s ease-in-out infinite;
 }
 
@@ -335,7 +335,7 @@ main {
 }
 
 .bottom-satellites {
-    top: 90px; /* Ring Y = 180 + 90 = 270px = around the lifted lotus flower */
+    top: 210px; /* Adjusted after moving out of lantern-bottom */
     animation: satellites_bottom_orbit 150s ease-in-out infinite;
 }
 
