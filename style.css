@@ -358,6 +358,7 @@ main {
     position: absolute;
     top: 0; left: 0;
     transform-style: preserve-3d;
+    transform: rotateY(var(--sat-rot, 0deg));
     will-change: transform;
 }
 

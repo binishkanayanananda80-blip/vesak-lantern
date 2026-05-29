@@ -112,11 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const elapsed = (ts - startTime) / 1000;  
             const t = elapsed % CYCLE;                 
 
-            /* ─ Satellite self-spin (2.0X) ─ */
+            /* ─ Satellite self-spin (2.0X) via CSS Variable ─ */
             const satA = (elapsed * SAT_SPEED) % 360;
-            satLants.forEach(sl => {
-                sl.style.transform = `translateZ(0.1px) rotateY(${satA}deg)`;
-            });
+            document.documentElement.style.setProperty('--sat-rot', `${satA}deg`);
 
             /* ─ Satellite continuous orbit (0.5X) ─ */
             const tsY = (elapsed * ORBIT_SPEED) % 360;   // Top right
