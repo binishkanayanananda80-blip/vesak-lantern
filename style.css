@@ -243,7 +243,7 @@ main {
     background-color: var(--panel-bg);
     border: 6px solid var(--frame-color);
     box-sizing: border-box;
-    backface-visibility: hidden;
+    backface-visibility: visible;
     overflow: hidden;
     transition: background-color 1.5s ease, box-shadow 1.5s ease, border-color 1.5s ease;
     /* Inner shadow for depth */
