@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     (function lanternSpinEngine() {
         const CYCLE     = 90;    // 6 phases * 15s per phase
         const SAT_SPEED = 180;   // 1.5X for satellite self-spin
-        const MAIN_SPEED = 6;    // 0.25X for main structure sweeps (90 degrees in 15s)
+        const MAIN_SPEED = 12;   // 0.50X for main structure sweeps (180 degrees in 15s)
         const ORBIT_SPEED = 18;  // 0.5X for satellite continuous orbit
 
         // DOM references
@@ -126,32 +126,32 @@ document.addEventListener('DOMContentLoaded', () => {
             let tY = 0, mY = 0, bY = 0;
 
             if (t < 15) {
-                // Phase 1: Full lantern left
+                // Phase 1: Full lantern left (0 to -180)
                 const a = -(t * MAIN_SPEED);
                 tY = mY = bY = a;
             } else if (t < 30) {
-                // Phase 2: Full lantern returns right
-                const a = -90 + ((t - 15) * MAIN_SPEED);
+                // Phase 2: Full lantern returns right (-180 to 0)
+                const a = -180 + ((t - 15) * MAIN_SPEED);
                 tY = mY = bY = a;
             } else if (t < 45) {
-                // Phase 3: Top left, Bottom right
+                // Phase 3: Top left, Bottom right (180 deg spread)
                 const a = (t - 30) * MAIN_SPEED;
                 tY = -a;
                 bY = a;
                 mY = 0;
             } else if (t < 60) {
                 // Phase 4: Top/Bottom return to center
-                const a = 90 - ((t - 45) * MAIN_SPEED);
+                const a = 180 - ((t - 45) * MAIN_SPEED);
                 tY = -a;
                 bY = a;
                 mY = 0;
             } else if (t < 75) {
-                // Phase 5: Middle right
+                // Phase 5: Middle right (0 to 180)
                 mY = (t - 60) * MAIN_SPEED;
                 tY = bY = 0;
             } else if (t < 90) {
                 // Phase 6: Middle returns to center
-                mY = 90 - ((t - 75) * MAIN_SPEED);
+                mY = 180 - ((t - 75) * MAIN_SPEED);
                 tY = bY = 0;
             }
 
