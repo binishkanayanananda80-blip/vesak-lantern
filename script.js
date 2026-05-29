@@ -90,11 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
        and animation to stutter/stick.
     ─────────────────────────────────────────────────────────────── */
     (function lanternSpinEngine() {
-        const CYCLE     = 150;   // full cycle length in seconds
-        const SAT_SPEED = 180;   // deg/s for satellite self-spin (1.5× of 2s period)
-
-        // Smooth easing — cubic ease-in-out
-        const ease = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        const CYCLE     = 90;    // 6 phases * 15s per phase
+        const SAT_SPEED = 180;   // 1.5X for satellite self-spin
+        const MAIN_SPEED = 6;    // 0.25X for main structure sweeps (90 degrees in 15s)
+        const ORBIT_SPEED = 18;  // 0.5X for satellite continuous orbit
 
         // DOM references
         const elTop    = document.getElementById('lantern-top');
@@ -110,74 +109,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function frame(ts) {
             if (!startTime) startTime = ts;
-            const elapsed = (ts - startTime) / 1000;  // total seconds
-            const t = elapsed % CYCLE;                 // position in cycle
+            const elapsed = (ts - startTime) / 1000;  
+            const t = elapsed % CYCLE;                 
 
-            /* ─ Satellite self-spin: always on, silky 60fps ─ */
+            /* ─ Satellite self-spin (1.5X) ─ */
             const satA = (elapsed * SAT_SPEED) % 360;
             satLants.forEach(sl => {
                 sl.style.transform = `rotateY(${satA.toFixed(1)}deg)`;
             });
 
-            /* ─ Phase-based rotation angles ─ */
-            let tY = 0, mY = 0, bY = 0, tsY = 0, bsY = 0;
+            /* ─ Satellite continuous orbit (0.5X) ─ */
+            const tsY = (elapsed * ORBIT_SPEED) % 360;   // Top right
+            const bsY = -(elapsed * ORBIT_SPEED) % 360;  // Bottom left
+
+            /* ─ Main Structure Linear Phases (0.25X) - No Sticking ─ */
+            let tY = 0, mY = 0, bY = 0;
 
             if (t < 15) {
-                // Phase 1a — full lantern sweeps LEFT (0 → -90°)
-                const a = -90 * ease(t / 15);
-                tY = mY = bY = tsY = bsY = a;
-
+                // Phase 1: Full lantern left
+                const a = -(t * MAIN_SPEED);
+                tY = mY = bY = a;
             } else if (t < 30) {
-                // Phase 1b — full lantern sweeps RIGHT (-90 → +90°)
-                const a = -90 + 180 * ease((t - 15) / 15);
-                tY = mY = bY = tsY = bsY = a;
-
+                // Phase 2: Full lantern returns right
+                const a = -90 + ((t - 15) * MAIN_SPEED);
+                tY = mY = bY = a;
             } else if (t < 45) {
-                // Phase 1c — full lantern returns to centre (+90 → 0°)
-                const a = 90 * (1 - ease((t - 30) / 15));
-                tY = mY = bY = tsY = bsY = a;
-
+                // Phase 3: Top left, Bottom right
+                const a = (t - 30) * MAIN_SPEED;
+                tY = -a;
+                bY = a;
+                mY = 0;
             } else if (t < 60) {
-                // Phase 2a — top LEFT, bottom RIGHT (split, 0 → ±90°)
-                const a = 90 * ease((t - 45) / 15);
-                tY = -(a);  tsY = -(a);
-                bY =   a;   bsY =   a;
+                // Phase 4: Top/Bottom return to center
+                const a = 90 - ((t - 45) * MAIN_SPEED);
+                tY = -a;
+                bY = a;
                 mY = 0;
-
             } else if (t < 75) {
-                // Phase 2b — split returns to centre (±90 → 0°)
-                const a = 90 * (1 - ease((t - 60) / 15));
-                tY = -(a);  tsY = -(a);
-                bY =   a;   bsY =   a;
-                mY = 0;
-
+                // Phase 5: Middle right
+                mY = (t - 60) * MAIN_SPEED;
+                tY = bY = 0;
             } else if (t < 90) {
-                // Phase 3a — middle body RIGHT (0 → +90°)
-                mY = 90 * ease((t - 75) / 15);
-                tY = bY = tsY = bsY = 0;
-
-            } else if (t < 105) {
-                // Phase 3b — middle body LEFT (+90 → -90°)
-                mY = 90 - 180 * ease((t - 90) / 15);
-                tY = bY = tsY = bsY = 0;
-
-            } else if (t < 120) {
-                // Phase 3c — middle body returns to centre (-90 → 0°)
-                mY = -90 * (1 - ease((t - 105) / 15));
-                tY = bY = tsY = bsY = 0;
-
-            } else {
-                // Phase 4 — gentle sway (last 30 s of cycle)
-                const sway = 12 * Math.sin(((t - 120) / 30) * Math.PI * 2);
-                tY = mY = bY = tsY = bsY = sway;
+                // Phase 6: Middle returns to center
+                mY = 90 - ((t - 75) * MAIN_SPEED);
+                tY = bY = 0;
             }
 
-            /* ─ Apply transforms directly — no CSS animation overhead ─ */
+            /* ─ Apply transforms directly ─ */
             elTop.style.transform    = `translate3d(-50%,0,0) rotateY(${tY.toFixed(2)}deg)`;
             elMid.style.transform    = `translate3d(-50%,-50%,0) rotateY(${mY.toFixed(2)}deg)`;
             elBot.style.transform    = `translate3d(-50%,0,0) rotateY(${bY.toFixed(2)}deg)`;
-            elTopSat.style.transform = `translate3d(0,0,0) rotateY(${tsY.toFixed(2)}deg)`;
-            elBotSat.style.transform = `translate3d(0,0,0) rotateY(${bsY.toFixed(2)}deg)`;
+            if(elTopSat) elTopSat.style.transform = `translate3d(0,0,0) rotateY(${tsY.toFixed(2)}deg)`;
+            if(elBotSat) elBotSat.style.transform = `translate3d(0,0,0) rotateY(${bsY.toFixed(2)}deg)`;
 
             requestAnimationFrame(frame);
         }

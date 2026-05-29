@@ -891,7 +891,6 @@ body.small-off .tassel::before {
     left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
-    animation: lotus_base_orbit 150s linear infinite;
 }
 
 @keyframes lotus_base_orbit {
