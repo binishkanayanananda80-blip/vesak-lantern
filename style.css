@@ -194,7 +194,7 @@ main {
     transform: translate3d(-50%, -50%, 0);
     width: var(--panel-w);
     height: var(--panel-h);
-    animation: phase3_middle 150s ease-in-out infinite;
+    animation: phase3_middle 150s linear infinite;
 }
 
 @keyframes phase3_middle {
@@ -209,7 +209,7 @@ main {
     transform: translate3d(-50%, 0, 0);
     width: var(--top-w);
     height: var(--top-h);
-    animation: phase2_top 150s ease-in-out infinite;
+    animation: phase2_top 150s linear infinite;
 }
 
 @keyframes phase2_top {
@@ -222,7 +222,7 @@ main {
     transform: translate3d(-50%, 0, 0);
     width: var(--base-w);
     height: var(--base-h);
-    animation: phase2_bottom 150s ease-in-out infinite;
+    animation: phase2_bottom 150s linear infinite;
 }
 
 @keyframes phase2_bottom {
@@ -326,7 +326,7 @@ main {
 }
 .top-satellites {
     top: -240px; /* Adjusted after moving out of lantern-bottom */
-    animation: satellites_top_orbit 150s ease-in-out infinite;
+    animation: satellites_top_orbit 150s linear infinite;
 }
 
 @keyframes satellites_top_orbit {
@@ -337,7 +337,7 @@ main {
 
 .bottom-satellites {
     top: 210px; /* Adjusted after moving out of lantern-bottom */
-    animation: satellites_bottom_orbit 150s ease-in-out infinite;
+    animation: satellites_bottom_orbit 150s linear infinite;
 }
 
 @keyframes satellites_bottom_orbit {
@@ -887,11 +887,11 @@ body.small-off .tassel::before {
 /* 3D Lotus Base */
 .lotus-base {
     position: absolute;
-    top: 210px; /* lantern-bottom starts at 120px, height 120px; lotus sits 30px inside bottom edge to cup it */
+    top: 310px; /* lotus center 70px below lantern-bottom; inner petal tips (160px up) reach 30px into bottom section = 1/4 coverage */
     left: 50%;
     width: 0; height: 0;
     transform-style: preserve-3d;
-    animation: lotus_base_orbit 150s ease-in-out infinite;
+    animation: lotus_base_orbit 150s linear infinite;
 }
 
 @keyframes lotus_base_orbit {
