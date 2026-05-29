@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             /* ─ Satellite self-spin (1.5X) ─ */
             const satA = (elapsed * SAT_SPEED) % 360;
             satLants.forEach(sl => {
-                sl.style.transform = `rotateY(${satA.toFixed(1)}deg)`;
+                sl.style.transform = `rotateY(${satA}deg)`;
             });
 
             /* ─ Satellite continuous orbit (0.5X) ─ */
@@ -156,11 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             /* ─ Apply transforms directly ─ */
-            elTop.style.transform    = `rotateY(${tY.toFixed(2)}deg)`;
-            elMid.style.transform    = `rotateY(${mY.toFixed(2)}deg)`;
-            elBot.style.transform    = `rotateY(${bY.toFixed(2)}deg)`;
-            if(elTopSat) elTopSat.style.transform = `rotateY(${tsY.toFixed(2)}deg)`;
-            if(elBotSat) elBotSat.style.transform = `rotateY(${bsY.toFixed(2)}deg)`;
+            elTop.style.transform    = `rotateY(${tY}deg)`;
+            elMid.style.transform    = `rotateY(${mY}deg)`;
+            elBot.style.transform    = `rotateY(${bY}deg)`;
+            if(elTopSat) elTopSat.style.transform = `rotateY(${tsY}deg)`;
+            if(elBotSat) elBotSat.style.transform = `rotateY(${bsY}deg)`;
 
             requestAnimationFrame(frame);
         }

@@ -173,6 +173,7 @@ main {
 .lantern-top, .lantern-middle, .lantern-bottom {
     position: absolute;
     transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .lantern-spin-wrapper {
@@ -320,9 +321,10 @@ main {
 /* Satellites */
 .satellites-container {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 0; height: 0;
+    left: 50%;
     transform-style: preserve-3d;
+    width: 0; height: 0;
+    will-change: transform;
 }
 .top-satellites {
     top: -240px; /* Adjusted after moving out of lantern-bottom */
@@ -356,7 +358,7 @@ main {
     position: absolute;
     top: 0; left: 0;
     transform-style: preserve-3d;
-    /* self-spin handled by JS requestAnimationFrame engine */
+    will-change: transform;
 }
 
 @keyframes fastAxisSpin {
