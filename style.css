@@ -327,25 +327,23 @@ main {
     will-change: transform;
 }
 .top-satellites {
-    top: -240px; /* Adjusted after moving out of lantern-bottom */
-    /* animation handled by JS requestAnimationFrame engine */
+    top: -240px;
+    animation: satellites_top_orbit 20s linear infinite;
 }
 
 @keyframes satellites_top_orbit {
-    0%, 20%, 40%, 60%, 80%, 100% { transform: translate3d(0,0,0) rotateY(0deg); }
-    10%, 30%, 90% { transform: translate3d(0,0,0) rotateY(-135deg); }
-    50%, 70% { transform: translate3d(0,0,0) rotateY(135deg); }
+    0% { transform: translate3d(0,0,0) rotateY(0deg); }
+    100% { transform: translate3d(0,0,0) rotateY(360deg); }
 }
 
 .bottom-satellites {
-    top: 210px; /* Adjusted after moving out of lantern-bottom */
-    /* animation handled by JS requestAnimationFrame engine */
+    top: 210px;
+    animation: satellites_bottom_orbit 20s linear infinite;
 }
 
 @keyframes satellites_bottom_orbit {
-    0%, 20%, 40%, 60%, 80%, 100% { transform: translate3d(0,0,0) rotateY(0deg); }
-    10%, 50%, 70%, 90% { transform: translate3d(0,0,0) rotateY(-135deg); }
-    30% { transform: translate3d(0,0,0) rotateY(135deg); }
+    0% { transform: translate3d(0,0,0) rotateY(0deg); }
+    100% { transform: translate3d(0,0,0) rotateY(-360deg); }
 }
 .satellite {
     position: absolute;
@@ -358,8 +356,7 @@ main {
     position: absolute;
     top: 0; left: 0;
     transform-style: preserve-3d;
-    transform: rotateY(var(--sat-rot, 0deg));
-    will-change: transform;
+    animation: fastAxisSpin 1s linear infinite;
 }
 
 @keyframes fastAxisSpin {

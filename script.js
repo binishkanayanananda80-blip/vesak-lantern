@@ -95,13 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const MAIN_SPEED = 12;   // 0.50X for main structure sweeps (180 degrees in 15s)
         const ORBIT_SPEED = 18;  // 0.5X for satellite continuous orbit
 
-        // DOM references
         const elTop    = document.getElementById('lantern-top');
         const elMid    = document.querySelector('.lantern-middle');
         const elBot    = document.getElementById('lantern-bottom');
-        const elTopSat = document.querySelector('.top-satellites');
-        const elBotSat = document.querySelector('.bottom-satellites');
-        const satLants = document.querySelectorAll('.satellite-lantern');
 
         if (!elTop || !elMid || !elBot) return;
 
@@ -111,14 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!startTime) startTime = ts;
             const elapsed = (ts - startTime) / 1000;  
             const t = elapsed % CYCLE;                 
-
-            /* ─ Satellite self-spin (2.0X) via CSS Variable ─ */
-            const satA = (elapsed * SAT_SPEED) % 360;
-            document.documentElement.style.setProperty('--sat-rot', `${satA}deg`);
-
-            /* ─ Satellite continuous orbit (0.5X) ─ */
-            const tsY = (elapsed * ORBIT_SPEED) % 360;   // Top right
-            const bsY = -(elapsed * ORBIT_SPEED) % 360;  // Bottom left
 
             /* ─ Main Structure Linear Phases (0.25X) - No Sticking ─ */
             let tY = 0, mY = 0, bY = 0;
@@ -157,8 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             elTop.style.transform    = `rotateY(${tY}deg)`;
             elMid.style.transform    = `rotateY(${mY}deg)`;
             elBot.style.transform    = `rotateY(${bY}deg)`;
-            if(elTopSat) elTopSat.style.transform = `rotateY(${tsY}deg)`;
-            if(elBotSat) elBotSat.style.transform = `rotateY(${bsY}deg)`;
 
             requestAnimationFrame(frame);
         }
